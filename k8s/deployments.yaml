@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-dc-1
+spec:
+  selector:
+    matchLabels:
+      app: rest-dc-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rest-dc-1
+    spec:
+      containers:
+      - name: rest-dc-1
+        image: kalip/hello-rest:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080
+        command: ["/app/rest-app", "-name=DC 1"]
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rest-dc-2
+spec:
+  selector:
+    matchLabels:
+      app: rest-dc-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: rest-dc-2
+    spec:
+      containers:
+      - name: rest-dc-2
+        image: kalip/hello-rest:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 8080
+        command: ["/app/rest-app", "-name=DC 2"]
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-dc-1
+spec:
+  selector:
+    matchLabels:
+      app: grpc-dc-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-dc-1
+    spec:
+      containers:
+      - name: grpc-dc-1
+        image: kalip/hello-grpc:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 3000
+        command: ["/app/grpc-app", "-name=DC 1"]
+        
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-dc-2
+spec:
+  selector:
+    matchLabels:
+      app: grpc-dc-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grpc-dc-2
+    spec:
+      containers:
+      - name: grpc-dc-2
+        image: kalip/hello-grpc:latest
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 3000
+        command: ["/app/grpc-app", "-name=DC 2"]
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dc-1
+spec:
+  selector:
+    matchLabels:
+      app: dc-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dc-1
+    spec:
+      containers:
+      - name: dc-1
+        image: envoyproxy/envoy:v1.12.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/envoy/envoy.yaml
+          subPath: config.yaml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: envoy-dc-1
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dc-2
+spec:
+  selector:
+    matchLabels:
+      app: dc-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dc-2
+    spec:
+      containers:
+      - name: dc-2
+        image: envoyproxy/envoy:v1.12.0
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "100m"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/envoy/envoy.yaml
+          subPath: config.yaml
+      volumes:
+        - name: config-volume
+          configMap:
+            name: envoy-dc-2
