@@ -24,6 +24,7 @@ This repo contains resources that can be used to setup a mock environment for te
 
 ```console
 foo@bar:~$ git clone https://github.com/amalaruja/envoy-inter-dc-traffic-manager-blog.git
+foo@bar:~$ cd envoy-inter-dc-traffic-manager-blog
 foo@bar:~$ kubectl apply -f ./k8s
 ```
 
