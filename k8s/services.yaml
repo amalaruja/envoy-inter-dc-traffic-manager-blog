@@ -60,7 +60,7 @@ spec:
     app: dc-1
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 8080
     nodePort: 30081
 ---
 
@@ -88,7 +88,7 @@ spec:
     app: dc-2
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 8080
     nodePort: 30082
 ---
 

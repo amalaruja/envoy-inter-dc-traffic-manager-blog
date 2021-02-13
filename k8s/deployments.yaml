@@ -124,7 +124,7 @@ spec:
     spec:
       containers:
       - name: dc-1
-        image: envoyproxy/envoy:v1.12.0
+        image: envoyproxy/envoy:v1.17.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
@@ -158,7 +158,7 @@ spec:
     spec:
       containers:
       - name: dc-2
-        image: envoyproxy/envoy:v1.12.0
+        image: envoyproxy/envoy:v1.17.0
         imagePullPolicy: IfNotPresent
         resources:
           limits:
