@@ -17,11 +17,11 @@ static_resources:
               domains: ["*"]
               routes:
               - match:
-                  prefix: "/hello"
+                  path: "/hello"
                 route:
                   cluster: dc-1
               - match:
-                  prefix: "/HelloGrpcService/Hello"
+                  path: "/HelloGrpcService/Hello"
                 route:
                   cluster: dc-2
           access_log:
