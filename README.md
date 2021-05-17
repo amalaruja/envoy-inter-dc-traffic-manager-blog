@@ -32,18 +32,18 @@ foo@bar:~$ kubectl apply -f ./k8s
 
 ### DC 1
 ```console
-foo@bar:~$ curl localhost:30081/hello
+foo@bar:~$ curl localhost:30081/hello-rest-service/hello
 Hello from DC 1!
-foo@bar:~$ grpcurl --plaintext --import-path ./proto/hello -proto hello.proto localhost:30081 HelloGrpcService/Hello
+foo@bar:~$ grpcurl --plaintext --import-path ./proto -proto hello.proto localhost:30081 HelloGrpcService/Hello
 {
   "reply": "Hello from DC 1!"
 }
 ```
 ### DC 2
 ```console
-foo@bar:~$ curl localhost:30082/hello
+foo@bar:~$ curl localhost:30082/hello-rest-service/hello
 Hello from DC 2!
-foo@bar:~$ grpcurl --plaintext --import-path ./proto/hello -proto hello.proto localhost:30082 HelloGrpcService/Hello
+foo@bar:~$ grpcurl --plaintext --import-path ./proto -proto hello.proto localhost:30082 HelloGrpcService/Hello
 {
   "reply": "Hello from DC 2!"
 }
