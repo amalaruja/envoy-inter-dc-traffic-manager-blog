@@ -54,7 +54,12 @@ static_resources:
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     protocol_selection: USE_DOWNSTREAM_PROTOCOL
-    connect_timeout: 0.25s
+    connect_timeout: 10s
+    upstream_connection_options:
+      tcp_keepalive:
+        keepalive_probes: 2
+        keepalive_time: 1
+        keepalive_interval: 10
     load_assignment:
       cluster_name: dc-1
       endpoints:
@@ -68,7 +73,12 @@ static_resources:
     type: LOGICAL_DNS
     lb_policy: ROUND_ROBIN
     protocol_selection: USE_DOWNSTREAM_PROTOCOL
-    connect_timeout: 0.25s
+    connect_timeout: 10s
+    upstream_connection_options:
+      tcp_keepalive:
+        keepalive_probes: 2
+        keepalive_time: 1
+        keepalive_interval: 10
     load_assignment:
       cluster_name: dc-2
       endpoints:

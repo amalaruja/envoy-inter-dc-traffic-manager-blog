@@ -57,7 +57,12 @@ data:
               - name: envoy.filters.http.router
       clusters:
       - name: http-dc-1
-        connect_timeout: 0.25s
+        connect_timeout: 10s
+        upstream_connection_options:
+          tcp_keepalive:
+            keepalive_probes: 2
+            keepalive_time: 1
+            keepalive_interval: 10
         type: LOGICAL_DNS
         dns_lookup_family: V4_ONLY
         lb_policy: ROUND_ROBIN
@@ -72,7 +77,12 @@ data:
                     address: rest-dc-1.default.svc.cluster.local
                     port_value: 8080
       - name: grpc-dc-1
-        connect_timeout: 0.25s
+        connect_timeout: 10s
+        upstream_connection_options:
+          tcp_keepalive:
+            keepalive_probes: 2
+            keepalive_time: 1
+            keepalive_interval: 10
         type: LOGICAL_DNS
         dns_lookup_family: V4_ONLY
         lb_policy: ROUND_ROBIN
@@ -153,7 +163,12 @@ data:
               - name: envoy.filters.http.router
       clusters:
       - name: http-dc-2
-        connect_timeout: 0.25s
+        connect_timeout: 10s
+        upstream_connection_options:
+          tcp_keepalive:
+            keepalive_probes: 2
+            keepalive_time: 1
+            keepalive_interval: 10
         type: LOGICAL_DNS
         dns_lookup_family: V4_ONLY
         lb_policy: ROUND_ROBIN
@@ -168,7 +183,12 @@ data:
                     address: rest-dc-2.default.svc.cluster.local
                     port_value: 8080
       - name: grpc-dc-2
-        connect_timeout: 0.25s
+        connect_timeout: 10s
+        upstream_connection_options:
+          tcp_keepalive:
+            keepalive_probes: 2
+            keepalive_time: 1
+            keepalive_interval: 10
         type: LOGICAL_DNS
         dns_lookup_family: V4_ONLY
         lb_policy: ROUND_ROBIN
