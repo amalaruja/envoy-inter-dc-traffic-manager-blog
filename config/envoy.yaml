@@ -17,7 +17,7 @@ static_resources:
               domains: ["*"]
               routes:
               - match:
-                  path: "/hello"
+                  path: "/hello-rest-service/hello"
                 route:
                   cluster: dc-1
               - match:

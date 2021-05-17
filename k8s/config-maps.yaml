@@ -23,7 +23,7 @@ data:
                   domains: ["*"]
                   routes:
                   - match:
-                      prefix: "/hello"
+                      prefix: "/hello-rest-service/hello"
                     route:
                       cluster: http-dc-1
                   - match:
@@ -119,7 +119,7 @@ data:
                   domains: ["*"]
                   routes:
                   - match:
-                      prefix: "/hello"
+                      prefix: "/hello-rest-service/hello"
                     route:
                       cluster: http-dc-2
                   - match:
